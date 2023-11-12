@@ -1,6 +1,6 @@
 # youtube-labels-to-audacity
 
-Converts labels from Youtube export to Audacity format.
+Converts labels from Youtube description to Audacity import lables format.
 
 Online converter link - [https://scsm-ua.github.io/youtube-labels-to-audacity/](https://scsm-ua.github.io/youtube-labels-to-audacity/)
 
