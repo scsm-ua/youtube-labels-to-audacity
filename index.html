@@ -1,0 +1,59 @@
+<head>
+	<style>
+		textarea {
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<h4>Youtube to Audacity labels converter</h4>
+	<div>
+		<div>
+			Paste Youtube labels export here:
+		</div>
+		<textarea rows="20" id="in"></textarea>
+	</div>
+	<div>
+		
+	</div>
+	<div>
+		<div>
+			<br>
+			Converted Audacity labels:
+		</div>
+		<textarea rows="20" id="out"></textarea>
+	</div>
+	<div>
+		<br>
+		github: <a href="https://github.com/scsm-ua/youtube-labels-to-audacity">https://github.com/scsm-ua/youtube-labels-to-audacity</a>
+	</div>
+	<script>
+
+		function convert(input) {
+			var rows = input.split(/[\r\n]/).map(function(r) { return r.trim() }).filter(Boolean);
+			var rows_parsed = rows.map(function(r) {
+
+				var match = r.match(/^(?:(\d+):)?(\d+):(\d+)\s+(.+)$/);
+
+				if (match) {
+					var hours = match && match[1] && parseInt(match[1]) || 0;
+					var minutes = parseInt(match[2]);
+					var seconds = parseInt(match[3]);
+
+					var total_seconds = hours * 3600 + minutes * 60 + seconds;
+
+					return `${total_seconds}\t${total_seconds}\t${match[4]}`;
+				}
+			});
+
+			return rows_parsed.join('\n');
+		}
+
+		var tin = document.getElementById("in");
+		var tout = document.getElementById("out")
+
+		tin.addEventListener('keyup', function() {
+			tout.value = convert(tin.value);
+		});
+	</script>
+</body>
